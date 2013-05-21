@@ -3,6 +3,24 @@ require 'spec_helper'
 describe PropertiesController do
   	render_views
 
+  	describe "#index" do
+  		fixtures :properties
+
+  		context "no search" do
+  			it "should return all properties" do
+  				get :index
+  				assigns(:properties).should == Property.all
+  			end
+  		end
+
+  		context "search" do
+  			it "should return relevant properties" do
+  				get :index, {:search => 'house'}
+  				assigns(:properties).should == Property.where("name LIKE ?", "%house%")
+  			end
+  		end
+  	end
+
 	describe "#show" do
 		fixtures :properties
 
@@ -12,12 +30,9 @@ describe PropertiesController do
 
 		it "should match the property" do
 			@property.should be_instance_of Property
+			Property.related(@property).should_not include(@property)
 			get :show, :id => @property.id
 			expect(response.body).to match("#{@property.name}")
-		end
-
-		it "should show the related properties property" do
-			Property.related(@property).should_not include(@property)
 		end
 
 		it "should not be further than 20km away and have less bedrooms" do
