@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Bedrooms</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+  </tr>
+  <% @properties.each do |property| %>
+    <tr>
+      <td><%= link_to property.name, property %></td>
+      <td><%= property.bedroom_count %></td>
+      <td><%= property.latitude %></td>
+      <td><%= property.longitude %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "Clear Search", properties_path %>

@@ -1,0 +1,35 @@
+<h2>Property</h2>
+
+<p>
+	<strong>Name:</strong>
+	<%= @property.name %>
+</p>
+
+<p>
+	<strong>Bedrooms:</strong>
+	<%= @property.bedroom_count %>
+</p>
+
+<p>
+	<strong>Latitude:</strong>
+	<%= @property.latitude %>
+</p>
+
+<p>
+	<strong>Longitude:</strong>
+	<%= @property.longitude %>
+</p>
+
+<h3>Nearby locations</h3>
+
+<% if @nearby_properties.present? %>
+	<ul>
+		<% @nearby_properties.each do |property| %>
+			<li><%= link_to property.name, property_path(property) %>  (<%= property.distance.round(2) %> km)</li>
+		<% end %>
+	</ul>
+<% else %>
+	<p>No nearby properties can be found :(</p>
+<% end %>
+
+<p><%= link_to "Home", properties_path %></p>

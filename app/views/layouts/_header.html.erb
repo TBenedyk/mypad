@@ -1,0 +1,11 @@
+<div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">MyPad</a>
+		<%= form_tag properties_path, :method => :get, :class => "input-append navSearch" do %>
+		    <%= text_field_tag :search, params[:search] %>
+		    <%= submit_tag "Search", :name => nil, :class => "btn" %>
+		<% end %>
+      </div>
+    </div>
+  </div>
